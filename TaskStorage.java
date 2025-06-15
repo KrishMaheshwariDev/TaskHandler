@@ -21,7 +21,45 @@ public class TaskStorage{
             catch(IOException e){
                 System.out.println("Failed to create Storage file: " + e.getMessage());
             }
-            
         }
     }
+
+    public static List<Task> loadTasks(){
+        List<Task> tasks = new ArrayList<>();
+
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(FILE_NAME)));
+            JSONArray array = new JSONArray(content);
+
+            for(int i = 0; i < array.length(); i++){
+                JSONObject obj = array.getJSONObject(i);
+                Task task = Task.fromJSONString(obj.toString());
+                if(task != null){
+                    tasks.add(task);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading tasks: " + e.getMessage());
+
+        }
+        return tasks;
+    }
+
+    public static void saveTasks(List<Task> tasks){
+        JSONArray array = new JSONArray();
+
+        for (Task task : tasks){
+            JSONObject obj = new JSONObject(task.toJSONString());
+            array.put(obj);
+        }
+
+        try{
+            Files.write(Paths.get(FILE_NAME), array.toString(4).getBytes());
+        }
+        catch (IOException e){
+            System.out.println("Error saving tasks: "+ e.getMessage());
+        }
+    }
+
+    
 }
