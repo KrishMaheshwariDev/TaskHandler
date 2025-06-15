@@ -16,7 +16,7 @@ A lightweight, blazing-fast **Command Line Interface (CLI)** to manage your dail
 ---
 
 ## 🛠 Project Structure
-
+```
 TaskTracker/
 │
 ├── lib/
@@ -29,7 +29,7 @@ TaskTracker/
 ├── task-cli.bat # Windows CLI wrapper
 ├── tasks.json # (auto-generated) Task database
 └── README.md
-
+```
 ## 🧪 How to Use
 
 ### 📦 Compile
